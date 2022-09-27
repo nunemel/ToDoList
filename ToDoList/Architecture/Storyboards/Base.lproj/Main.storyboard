@@ -46,7 +46,7 @@
         <!--New To-Do-->
         <scene sceneID="bZR-H8-l0k">
             <objects>
-                <tableViewController id="62e-zg-wxT" sceneMemberID="viewController">
+                <tableViewController id="62e-zg-wxT" customClass="ToDoDetailTableViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="sYY-5C-ewy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,26 +55,34 @@
                             <tableViewSection headerTitle="Basic Information" id="ZmF-V9-ckc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iv4-EU-MIs">
-                                        <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="34.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iv4-EU-MIs" id="VW0-Fq-wTb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="34.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" id="uwK-UR-FTe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="34.5"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYk-Ig-iy9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="58" height="43.5"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system">
-                                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
-                                                            </buttonConfiguration>
+                                                            <rect key="frame" x="0.0" y="0.0" width="58" height="34.5"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" image="circle" catalog="system">
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                                            </state>
+                                                            <state key="selected" image="checkmark.circle.fill" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="isCompleteButtonTapped:" destination="62e-zg-wxT" eventType="touchUpInside" id="bTz-9V-jfZ"/>
+                                                            </connections>
                                                         </button>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Atz-Qe-KE9">
-                                                            <rect key="frame" x="58" y="0.0" width="356" height="43.5"/>
+                                                            <rect key="frame" x="58" y="0.0" width="356" height="34.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <action selector="returnPressed:" destination="62e-zg-wxT" eventType="primaryActionTriggered" id="AU3-qh-Mum"/>
+                                                                <action selector="textEditingChanged:" destination="62e-zg-wxT" eventType="editingChanged" id="PD1-4w-Bb8"/>
+                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
@@ -96,7 +104,7 @@
                             <tableViewSection headerTitle="Table View Section" id="Lfe-GL-Toy">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="aLY-HQ-I8a" detailTextLabel="ACC-1t-td5" style="IBUITableViewCellStyleValue1" id="tNK-Bz-UQR">
-                                        <rect key="frame" x="0.0" y="143" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="134" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tNK-Bz-UQR" id="gTk-VX-qzI">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -120,7 +128,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rAk-8y-Rwk">
-                                        <rect key="frame" x="0.0" y="186.5" width="414" height="216.5"/>
+                                        <rect key="frame" x="0.0" y="177.5" width="414" height="216.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rAk-8y-Rwk" id="Msw-dH-h5Y">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="216.5"/>
@@ -131,7 +139,10 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </stackView>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="ksy-Ku-pQG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="216.5"/>
+                                                    <connections>
+                                                        <action selector="datePickerChanged:" destination="62e-zg-wxT" eventType="primaryActionTriggered" id="6a4-1g-wAV"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -147,7 +158,7 @@
                             <tableViewSection headerTitle="Notes" id="wFg-Im-eRr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="VGM-yD-fZ9">
-                                        <rect key="frame" x="0.0" y="453" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="444" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VGM-yD-fZ9" id="OBo-Ie-aaJ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
@@ -189,6 +200,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dueDateDatePicker" destination="ksy-Ku-pQG" id="kSs-HE-spi"/>
+                        <outlet property="dueDateLabel" destination="ACC-1t-td5" id="Et2-TE-8km"/>
+                        <outlet property="isCompleteButton" destination="fYk-Ig-iy9" id="Fab-yS-32K"/>
+                        <outlet property="notesTextView" destination="Xg0-7Z-lAP" id="p5B-yO-x5E"/>
+                        <outlet property="saveButton" destination="kvs-2x-yfj" id="Ml7-z3-y5J"/>
+                        <outlet property="titleTextField" destination="Atz-Qe-KE9" id="hkt-GF-URG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jOG-LF-F9H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="j8U-88-hO5" userLabel="Exit" sceneMemberID="exit"/>
@@ -229,6 +248,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
