@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ToDoDetailTableViewController: UITableViewController {
+final class ToDoDetailTableViewController: UITableViewController {
 
   @IBOutlet private var titleTextField: UITextField!
   @IBOutlet private var isCompleteButton: UIButton!
@@ -16,10 +16,13 @@ class ToDoDetailTableViewController: UITableViewController {
   @IBOutlet private var notesTextView: UITextView!
   @IBOutlet private var saveButton: UIBarButtonItem!
 
-  var isDatePickerHidden = true
-  let dateLabelIndexPath = IndexPath(row: 0, section: 1)
-  let datePickerIndexPath = IndexPath(row: 1, section: 1)
-  let notesIndexPath = IndexPath(row: 0, section: 2)
+  private var isDatePickerHidden = true
+  private let dateLabelIndexPath = IndexPath(row: 0, section: 1)
+  private let datePickerIndexPath = IndexPath(row: 1, section: 1)
+  private let notesIndexPath = IndexPath(row: 0, section: 2)
+    
+  var toDo: ToDo?
+
 
   @IBAction func returnPressed(_ sender: UITextField) {
     sender.resignFirstResponder()
@@ -33,7 +36,7 @@ class ToDoDetailTableViewController: UITableViewController {
     updateDueDateLabel(date: sender.date)
   }
 
-  func updateDueDateLabel(date: Date) {
+  private func updateDueDateLabel(date: Date) {
     dueDateLabel.text = date.formatted(
       .dateTime.month(.defaultDigits)
         .day().year(.twoDigits).hour().minute()
@@ -57,7 +60,7 @@ class ToDoDetailTableViewController: UITableViewController {
     updateSaveButtonState()
   }
 
-  func updateSaveButtonState() {
+  private func updateSaveButtonState() {
     let shouldEnableSaveButton = titleTextField.text?.isEmpty == false
     saveButton.isEnabled = shouldEnableSaveButton
   }
@@ -101,5 +104,18 @@ class ToDoDetailTableViewController: UITableViewController {
       tableView.beginUpdates()
       tableView.endUpdates()
     }
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+    guard segue.identifier == "saveUnwind" else { return }
+      
+    let title = titleTextField.text!
+    let isComplete = isCompleteButton.isSelected
+    let dueDate = dueDateDatePicker.date
+    let notes = notesTextView.text
+      
+    toDo = ToDo(title: title, isComplete: isComplete,
+                dueDate: dueDate, notes: notes)
   }
 }
