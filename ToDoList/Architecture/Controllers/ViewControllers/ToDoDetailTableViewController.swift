@@ -9,20 +9,19 @@ import UIKit
 
 final class ToDoDetailTableViewController: UITableViewController {
 
-  @IBOutlet private var titleTextField: UITextField!
-  @IBOutlet private var isCompleteButton: UIButton!
-  @IBOutlet private var dueDateLabel: UILabel!
-  @IBOutlet private var dueDateDatePicker: UIDatePicker!
-  @IBOutlet private var notesTextView: UITextView!
-  @IBOutlet private var saveButton: UIBarButtonItem!
+  @IBOutlet var titleTextField: UITextField!
+  @IBOutlet var isCompleteButton: UIButton!
+  @IBOutlet var dueDateLabel: UILabel!
+  @IBOutlet var dueDateDatePicker: UIDatePicker!
+  @IBOutlet var notesTextView: UITextView!
+  @IBOutlet var saveButton: UIBarButtonItem!
 
   private var isDatePickerHidden = true
   private let dateLabelIndexPath = IndexPath(row: 0, section: 1)
   private let datePickerIndexPath = IndexPath(row: 1, section: 1)
   private let notesIndexPath = IndexPath(row: 0, section: 2)
-    
-  var toDo: ToDo?
 
+  var toDo: ToDo?
 
   @IBAction func returnPressed(_ sender: UITextField) {
     sender.resignFirstResponder()
@@ -46,14 +45,20 @@ final class ToDoDetailTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    dueDateDatePicker.date = Date().addingTimeInterval(24 * 60 * 60)
-    updateDueDateLabel(date: dueDateDatePicker.date)
+    let currentDueDate: Date
+    if let toDo = toDo {
+      navigationItem.title = "To-Do"
+      titleTextField.text = toDo.title
+      isCompleteButton.isSelected = toDo.isComplete
+      currentDueDate = toDo.dueDate
+      notesTextView.text = toDo.notes
+    }
+    else {
+      currentDueDate = Date().addingTimeInterval(24 * 60 * 60)
+    }
+    dueDateDatePicker.date = currentDueDate
+    updateDueDateLabel(date: currentDueDate)
     updateSaveButtonState()
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem
   }
 
   @IBAction func textEditingChanged(_ sender: UITextField) {
@@ -109,13 +114,25 @@ final class ToDoDetailTableViewController: UITableViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
     guard segue.identifier == "saveUnwind" else { return }
-      
+
     let title = titleTextField.text!
     let isComplete = isCompleteButton.isSelected
     let dueDate = dueDateDatePicker.date
     let notes = notesTextView.text
-      
-    toDo = ToDo(title: title, isComplete: isComplete,
-                dueDate: dueDate, notes: notes)
+
+    if toDo != nil {
+      toDo?.title = title
+      toDo?.isComplete = isComplete
+      toDo?.dueDate = dueDate
+      toDo?.notes = notes
+    }
+    else {
+      toDo = ToDo(
+        title: title,
+        isComplete: isComplete,
+        dueDate: dueDate,
+        notes: notes
+      )
+    }
   }
 }
