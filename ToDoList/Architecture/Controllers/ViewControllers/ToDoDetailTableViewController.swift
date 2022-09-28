@@ -23,25 +23,6 @@ final class ToDoDetailTableViewController: UITableViewController {
 
   var toDo: ToDo?
 
-  @IBAction func returnPressed(_ sender: UITextField) {
-    sender.resignFirstResponder()
-  }
-
-  @IBAction func isCompleteButtonTapped(_ sender: UIButton) {
-    isCompleteButton.isSelected.toggle()
-  }
-
-  @IBAction func datePickerChanged(_ sender: UIDatePicker) {
-    updateDueDateLabel(date: sender.date)
-  }
-
-  private func updateDueDateLabel(date: Date) {
-    dueDateLabel.text = date.formatted(
-      .dateTime.month(.defaultDigits)
-        .day().year(.twoDigits).hour().minute()
-    )
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -59,6 +40,25 @@ final class ToDoDetailTableViewController: UITableViewController {
     dueDateDatePicker.date = currentDueDate
     updateDueDateLabel(date: currentDueDate)
     updateSaveButtonState()
+  }
+
+  @IBAction func returnPressed(_ sender: UITextField) {
+    sender.resignFirstResponder()
+  }
+
+  @IBAction func isCompleteButtonTapped(_ sender: UIButton) {
+    isCompleteButton.isSelected.toggle()
+  }
+
+  @IBAction func datePickerChanged(_ sender: UIDatePicker) {
+    updateDueDateLabel(date: sender.date)
+  }
+
+  private func updateDueDateLabel(date: Date) {
+    dueDateLabel.text = date.formatted(
+      .dateTime.month(.defaultDigits)
+        .day().year(.twoDigits).hour().minute()
+    )
   }
 
   @IBAction func textEditingChanged(_ sender: UITextField) {
