@@ -58,7 +58,7 @@ final class ToDoTableViewController: UITableViewController,
 
     return cell
   }
-    
+
   // Override to support conditional editing of the table view.
   override func tableView(
     _ tableView: UITableView,
@@ -84,6 +84,7 @@ final class ToDoTableViewController: UITableViewController,
     }
   }
 
+  // MARK: - Actions
   @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
     guard segue.identifier == "saveUnwind" else { return }
     let sourceViewController =
@@ -151,5 +152,12 @@ final class ToDoTableViewController: UITableViewController,
         // Pass the selected object to the new view controller.
     }
     */
-
+  func checkmarkTapped(_ sender: ToDoCell) {
+    if let indexPath = tableView.indexPath(for: sender) {
+      var toDo = toDos[indexPath.row]
+      toDo.isComplete.toggle()
+      toDos[indexPath.row] = toDo
+      tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+  }
 }
