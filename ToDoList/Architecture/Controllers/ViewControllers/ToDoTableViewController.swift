@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class ToDoTableViewController: UITableViewController {
+final class ToDoTableViewController: UITableViewController,
+  ToDoCellDelegate
+{
 
   var toDos = [ToDo]()
 
@@ -41,19 +43,22 @@ final class ToDoTableViewController: UITableViewController {
     _ tableView: UITableView,
     cellForRowAt indexPath: IndexPath
   ) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(
-      withIdentifier: "ToDoCellIdentifier",
-      for: indexPath
-    )
+
+    let cell =
+      tableView.dequeueReusableCell(
+        withIdentifier: "ToDoCellIdentifier",
+        for: indexPath
+      ) as! ToDoCell
+
     let toDo = toDos[indexPath.row]
 
-    // Configure the cell...
-    var content = cell.defaultContentConfiguration()
-    content.text = toDo.title
-    cell.contentConfiguration = content
+    cell.titleLabel?.text = toDo.title
+    cell.isCompleteButton.isSelected = toDo.isComplete
+    cell.delegate = self
+
     return cell
   }
-
+    
   // Override to support conditional editing of the table view.
   override func tableView(
     _ tableView: UITableView,
@@ -84,7 +89,7 @@ final class ToDoTableViewController: UITableViewController {
     let sourceViewController =
       segue.source as! ToDoDetailTableViewController
     if let toDo = sourceViewController.toDo {
-        if let indexOfExistingToDo = toDos.firstIndex(of: toDo) {
+      if let indexOfExistingToDo = toDos.firstIndex(of: toDo) {
         toDos[indexOfExistingToDo] = toDo
         tableView.reloadRows(
           at: [
@@ -146,4 +151,5 @@ final class ToDoTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
 }

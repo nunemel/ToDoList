@@ -9,12 +9,12 @@ import UIKit
 
 final class ToDoDetailTableViewController: UITableViewController {
 
-  @IBOutlet private var titleTextField: UITextField!
-  @IBOutlet private var isCompleteButton: UIButton!
-  @IBOutlet private var dueDateLabel: UILabel!
-  @IBOutlet private var dueDateDatePicker: UIDatePicker!
-  @IBOutlet private var notesTextView: UITextView!
-  @IBOutlet private var saveButton: UIBarButtonItem!
+  @IBOutlet var titleTextField: UITextField!
+  @IBOutlet var isCompleteButton: UIButton!
+  @IBOutlet var dueDateLabel: UILabel!
+  @IBOutlet var dueDateDatePicker: UIDatePicker!
+  @IBOutlet var notesTextView: UITextView!
+  @IBOutlet var saveButton: UIBarButtonItem!
 
   private var isDatePickerHidden = true
   private let dateLabelIndexPath = IndexPath(row: 0, section: 1)

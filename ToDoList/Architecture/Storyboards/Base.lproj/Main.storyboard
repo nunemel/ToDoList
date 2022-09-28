@@ -16,14 +16,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="Dec-Jl-tox">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" rowHeight="66" id="Dec-Jl-tox" customClass="ToDoCell" customModule="ToDoList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dec-Jl-tox" id="10l-H7-PXE">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IxP-hY-SUe">
+                                            <rect key="frame" x="12" y="12" width="28" height="42"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" image="circle" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                            </state>
+                                            <state key="selected" image="checkmark.circle.fill" catalog="system"/>
+                                            <connections>
+                                                <action selector="completeButtonTapped:" destination="Dec-Jl-tox" eventType="touchUpInside" id="aez-Ks-mL8"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVV-SV-AVc">
+                                            <rect key="frame" x="52" y="23" width="29" height="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="aVV-SV-AVc" firstAttribute="centerY" secondItem="10l-H7-PXE" secondAttribute="centerY" id="6tx-Fw-cNT"/>
+                                        <constraint firstItem="IxP-hY-SUe" firstAttribute="leading" secondItem="10l-H7-PXE" secondAttribute="leading" constant="12" id="7Zz-Sz-ad4"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="aVV-SV-AVc" secondAttribute="bottom" constant="12" id="DpH-1y-poC"/>
+                                        <constraint firstItem="IxP-hY-SUe" firstAttribute="top" secondItem="10l-H7-PXE" secondAttribute="top" constant="12" id="RwB-a4-4Ti"/>
+                                        <constraint firstItem="aVV-SV-AVc" firstAttribute="top" secondItem="10l-H7-PXE" secondAttribute="topMargin" constant="12" id="cL4-fm-hsc"/>
+                                        <constraint firstItem="aVV-SV-AVc" firstAttribute="leading" secondItem="IxP-hY-SUe" secondAttribute="trailing" constant="12" id="kD6-lR-Uhs"/>
+                                        <constraint firstAttribute="bottom" secondItem="IxP-hY-SUe" secondAttribute="bottom" constant="12" id="nBO-If-SQM"/>
+                                        <constraint firstItem="IxP-hY-SUe" firstAttribute="centerY" secondItem="10l-H7-PXE" secondAttribute="centerY" id="nNv-m5-BGb"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="isCompleteButton" destination="IxP-hY-SUe" id="Rjk-d3-aUl"/>
+                                    <outlet property="titleLabel" destination="aVV-SV-AVc" id="5k4-Lr-jaT"/>
                                     <segue destination="62e-zg-wxT" kind="presentation" id="Bsb-4o-B9b"/>
                                 </connections>
                             </tableViewCell>
@@ -44,7 +75,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d7E-Uf-mfX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-135" y="59"/>
+            <point key="canvasLocation" x="-136.23188405797103" y="58.928571428571423"/>
         </scene>
         <!--New To-Do-->
         <scene sceneID="bZR-H8-l0k">
@@ -251,7 +282,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i3r-Eo-9zg"/>
+        <segue reference="Bsb-4o-B9b"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
