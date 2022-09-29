@@ -191,15 +191,15 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Notes" id="wFg-Im-eRr">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="200" id="VGM-yD-fZ9">
-                                        <rect key="frame" x="0.0" y="444" width="414" height="200"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="160" id="VGM-yD-fZ9">
+                                        <rect key="frame" x="0.0" y="444" width="414" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VGM-yD-fZ9" id="OBo-Ie-aaJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xg0-7Z-lAP">
-                                                    <rect key="frame" x="0.0" y="11" width="414" height="178"/>
+                                                    <rect key="frame" x="0.0" y="11" width="414" height="138"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -213,6 +213,36 @@
                                             <constraint firstAttribute="trailing" secondItem="Xg0-7Z-lAP" secondAttribute="trailing" symbolic="YES" id="rOh-TK-dWN"/>
                                             <constraint firstItem="Xg0-7Z-lAP" firstAttribute="top" secondItem="VGM-yD-fZ9" secondAttribute="top" constant="11" id="x71-gM-Yb7"/>
                                         </constraints>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Share" id="0v0-iX-VFK">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="160" id="7Ql-fq-XH4">
+                                        <rect key="frame" x="0.0" y="654" width="414" height="160"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Ql-fq-XH4" id="6u2-Kc-IAx">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMw-EV-P3e">
+                                                    <rect key="frame" x="172" y="64.5" width="70" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="L0E-R4-bVW"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="zzU-dU-Nkq"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Share"/>
+                                                    <connections>
+                                                        <action selector="sendEmail:" destination="62e-zg-wxT" eventType="touchUpInside" id="Tbd-dH-Dir"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="GMw-EV-P3e" firstAttribute="centerY" secondItem="6u2-Kc-IAx" secondAttribute="centerY" id="5Jr-5o-9Wx"/>
+                                                <constraint firstItem="GMw-EV-P3e" firstAttribute="centerX" secondItem="6u2-Kc-IAx" secondAttribute="centerX" id="uPC-su-RER"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -240,13 +270,14 @@
                         <outlet property="isCompleteButton" destination="fYk-Ig-iy9" id="Fab-yS-32K"/>
                         <outlet property="notesTextView" destination="Xg0-7Z-lAP" id="p5B-yO-x5E"/>
                         <outlet property="saveButton" destination="kvs-2x-yfj" id="Ml7-z3-y5J"/>
+                        <outlet property="shareButton" destination="GMw-EV-P3e" id="mMj-I7-nZ6"/>
                         <outlet property="titleTextField" destination="Atz-Qe-KE9" id="hkt-GF-URG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jOG-LF-F9H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="j8U-88-hO5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1517" y="-42"/>
+            <point key="canvasLocation" x="1515.9420289855075" y="-42.1875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VcP-RZ-f1c">
