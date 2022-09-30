@@ -5,8 +5,8 @@
 //  Created by Nune Melikyan on 27.09.22.
 //
 
-import UIKit
 import MessageUI
+import UIKit
 
 final class ToDoDetailTableViewController: UITableViewController {
 
@@ -139,22 +139,23 @@ final class ToDoDetailTableViewController: UITableViewController {
   }
 }
 
+extension ToDoDetailTableViewController:
+  MFMailComposeViewControllerDelegate
+{
 
-
-extension ToDoDetailTableViewController: MFMailComposeViewControllerDelegate {
-        
+  // MARK: - Email actions
   @IBAction func sendEmail(_ sender: UIButton) {
-      guard let title = toDo?.title,
-        let isComplete = toDo?.isComplete,
-        let dueDate = toDo?.dueDate
-      else { return }
+    guard let title = toDo?.title,
+      let isComplete = toDo?.isComplete,
+      let dueDate = toDo?.dueDate
+    else { return }
 
-      let toDoDescription =
-        "Title: \(title), isComplete: \(isComplete), duDate: \(dueDate)"
+    let toDoDescription =
+      "Title: \(title), isComplete: \(isComplete), duDate: \(dueDate)"
     // Modify following variables with your text / recipient
     let recipientEmail = "test@email.com"
-    let subject = "Share To Do task \(title)"
-      
+    let subject = "Share To Do task: \(title)"
+
     let body =
       toDoDescription
 

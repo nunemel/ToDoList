@@ -11,11 +11,29 @@ final class ToDoTableViewController: UITableViewController,
   ToDoCellDelegate
 {
 
+  var filteredТоDos: [ToDo] = []
+
   var toDos = [ToDo]()
+  let searchController = UISearchController(
+    searchResultsController: nil
+  )
+
+  var isFiltering: Bool {
+    return searchController.isActive && !isSearchBarEmpty
+  }
 
   // MARK: - Lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    searchController.searchResultsUpdater = self
+
+    searchController.obscuresBackgroundDuringPresentation = false
+
+    searchController.searchBar.placeholder = "Search To Dos"
+
+    navigationItem.searchController = searchController
+    definesPresentationContext = true
 
     if let savedToDos = ToDo.loadToDos() {
       toDos = savedToDos
@@ -23,12 +41,20 @@ final class ToDoTableViewController: UITableViewController,
     else {
       toDos = ToDo.loadSampleToDos()
     }
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
     navigationItem.leftBarButtonItem = editButtonItem
+  }
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem
+  // MARK: - Search
+  var isSearchBarEmpty: Bool {
+    return searchController.searchBar.text?.isEmpty ?? true
+  }
+
+  func filterContentForSearchText(_ searchText: String) {
+    filteredТоDos = toDos.filter { (toDo: ToDo) -> Bool in
+      return toDo.title.lowercased().contains(searchText.lowercased())
+    }
+
+    tableView.reloadData()
   }
 
   // MARK: - Table view data source
@@ -37,7 +63,12 @@ final class ToDoTableViewController: UITableViewController,
     numberOfRowsInSection section: Int
   ) -> Int {
 
+    if isFiltering {
+      return filteredТоDos.count
+    }
+
     return toDos.count
+
   }
 
   override func tableView(
@@ -51,7 +82,13 @@ final class ToDoTableViewController: UITableViewController,
         for: indexPath
       ) as! ToDoCell
 
-    let toDo = toDos[indexPath.row]
+    let toDo: ToDo
+    if isFiltering {
+      toDo = filteredТоDos[indexPath.row]
+    }
+    else {
+      toDo = toDos[indexPath.row]
+    }
 
     cell.titleLabel?.text = toDo.title
     cell.isCompleteButton.isSelected = toDo.isComplete
@@ -121,7 +158,13 @@ final class ToDoTableViewController: UITableViewController,
       return detailController
     }
     tableView.deselectRow(at: indexPath, animated: true)
-    detailController?.toDo = toDos[indexPath.row]
+
+    if isFiltering {
+      detailController?.toDo = filteredТоDos[indexPath.row]
+    }
+    else {
+      detailController?.toDo = toDos[indexPath.row]
+    }
 
     return detailController
   }
@@ -134,5 +177,12 @@ final class ToDoTableViewController: UITableViewController,
       tableView.reloadRows(at: [indexPath], with: .automatic)
       ToDo.saveToDos(toDos)
     }
+  }
+}
+
+extension ToDoTableViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    let searchBar = searchController.searchBar
+    filterContentForSearchText(searchBar.text!)
   }
 }
